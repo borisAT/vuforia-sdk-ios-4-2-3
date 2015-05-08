@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A54471EE-20F9-4724-B8C3-75F47498D3E0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>VideoPlayback</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4A6754E896C0624DBAA39BB60EA6E95C157727BD</key>
+		<string>https://github.com/borisAT/vuforia-sdk-ios-4-2-3.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>samples/SerwusDemo/VideoPlayback.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4A6754E896C0624DBAA39BB60EA6E95C157727BD</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/borisAT/vuforia-sdk-ios-4-2-3.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4A6754E896C0624DBAA39BB60EA6E95C157727BD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4A6754E896C0624DBAA39BB60EA6E95C157727BD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>vuforia-sdk-ios-4-2-3</string>
+		</dict>
+	</array>
+</dict>
+</plist>

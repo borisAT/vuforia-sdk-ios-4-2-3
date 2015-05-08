@@ -31,25 +31,28 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   
-    
-    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
+/*
     SampleAppAboutViewController *vc = [[[SampleAppAboutViewController alloc] initWithNibName:@"SampleAppAboutViewController" bundle:nil] autorelease];
     vc.appTitle = @"Serwus - Stadt & Land";
     vc.appAboutPageName = @"VP_about";
     vc.appViewControllerClassName = @"VideoPlaybackViewController";
-    
     UINavigationController * nc = [[[UINavigationController alloc]initWithRootViewController:vc] autorelease];
     nc.navigationBar.barStyle = UIBarStyleDefault;
+ */
     
+    Class vcClass = NSClassFromString(@"VideoPlaybackViewController");
+    id vc = [[vcClass alloc]  initWithNibName:nil bundle:nil];
+
+    UINavigationController * nc = [[[UINavigationController alloc]initWithRootViewController:vc] autorelease];
+  
     self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
     return YES;
-     
     
-    
+    [vc release]; // don't leak memory
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

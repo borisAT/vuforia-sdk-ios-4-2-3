@@ -13,4 +13,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic) id<SampleGLResourceHandler> glResourceHandler;
 
+@property (nonatomic, copy) NSString * appViewControllerClassName;
+
 @end
