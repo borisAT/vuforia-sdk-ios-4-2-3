@@ -54,7 +54,8 @@ namespace {
         "icon_loading.png",
         "icon_error.png",
         "crossmedia.png",
-        "augsburg.png"
+        "augsburg.png",
+        "demo.png"
     };
     
     enum tagObjectIndex {
@@ -63,6 +64,7 @@ namespace {
         OBJECT_ERROR_ICON,
         OBJECT_KEYFRAME_1,
         OBJECT_KEYFRAME_2,
+        OBJECT_KEYFRAME_3
     };
     
     const NSTimeInterval TRACKING_LOST_TIMEOUT = 2.0f;
@@ -198,14 +200,17 @@ namespace {
         // playing when the app went into the background
         VideoPlayerHelper* player = [self getVideoPlayerHelper:i];
         NSString* filename;
-        
+      
         switch (i) {
             case 0:
-            filename = @"crossmedia.mp4";
-            break;
-            default:
-            filename = @"augsburg.mp4";
-            break;
+                filename = @"crossmedia.mp4";
+                break;
+            case 1:
+                filename = @"augsburg.mp4";
+                break;
+            case 2:
+                filename = @"demo.mp4";
+                break;
         }
         
         if (NO == [player load:filename playImmediately:NO fromPosition:videoPlaybackTime[i]]) {
@@ -428,17 +433,18 @@ namespace {
     
     // Did we find any trackables this frame?
     for (int i = 0; i < numActiveTrackables; ++i) {
+    
         // Get the trackable
         const QCAR::TrackableResult* trackableResult = state.getTrackableResult(i);
         const QCAR::ImageTarget& imageTarget = (const QCAR::ImageTarget&) trackableResult->getTrackable();
         
         // VideoPlayerHelper to use for current target
-        int playerIndex = 0;    // stones
+       
+        int playerIndex = 0;    // nature
         
-        if (strcmp(imageTarget.getName(), "img_Seite_004_Bild_0002") == 0)
-        {
-            playerIndex = 1;
-        }
+        if (strcmp(imageTarget.getName(), "food") == 0)     { playerIndex = 1; }
+        if (strcmp(imageTarget.getName(), "stones") == 0)   { playerIndex = 2; }
+        
         
         // Mark this video (target) as active
         videoData[playerIndex].isActive = YES;
@@ -533,7 +539,7 @@ namespace {
             frameTextureID = [t textureID];
             aspectRatio = (float)[t height] / (float)[t width];
             texCoords = quadTexCoords;
-        }
+           }
         
         // Get the current projection matrix
         QCAR::Matrix44F projMatrix = vapp.projectionMatrix;
@@ -569,9 +575,13 @@ namespace {
             
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, frameTextureID);
+            NSLog(@"frameTextureID, %u", frameTextureID);
+            NSLog(@"frameTextureID, %u", GL_TEXTURE_2D);
+
             glUniformMatrix4fv(mvpMatrixHandle, 1, GL_FALSE, (GLfloat*)&modelViewProjectionVideo.data[0]);
             glUniform1i(texSampler2DHandle, 0 /*GL_TEXTURE0*/);
             glDrawElements(GL_TRIANGLES, NUM_QUAD_INDEX, GL_UNSIGNED_SHORT, quadIndices);
+            
             
             glDisableVertexAttribArray(vertexHandle);
             glDisableVertexAttribArray(normalHandle);
@@ -612,6 +622,7 @@ namespace {
             QCAR::Matrix44F modelViewProjectionButton;
             
             //SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, videoData[playerIndex].targetPositiveDimensions.data[1] / SCALE_ICON_TRANSLATION, &modelViewMatrixButton.data[0]);
+
             SampleApplicationUtils::translatePoseMatrix(0.0f, 0.0f, 5.0f, &modelViewMatrixButton.data[0]);
             
             SampleApplicationUtils::scalePoseMatrix(videoData[playerIndex].targetPositiveDimensions.data[1] / SCALE_ICON,
@@ -622,7 +633,6 @@ namespace {
             SampleApplicationUtils::multiplyMatrix(projMatrix.data,
                                         &modelViewMatrixButton.data[0] ,
                                         &modelViewProjectionButton.data[0]);
-            
             glDepthFunc(GL_LEQUAL);
             
             glUseProgram(shaderProgramID);
@@ -634,8 +644,8 @@ namespace {
             glEnableVertexAttribArray(vertexHandle);
             glEnableVertexAttribArray(normalHandle);
             glEnableVertexAttribArray(textureCoordHandle);
-            
             // Blend the icon over the background
+  
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             
@@ -657,6 +667,7 @@ namespace {
         
         SampleApplicationUtils::checkGlError("VideoPlayback renderFrameQCAR");
     }
+   
     
     // --- INFORMATION ---
     // One could pause automatic playback of a video at this point.  Simply call

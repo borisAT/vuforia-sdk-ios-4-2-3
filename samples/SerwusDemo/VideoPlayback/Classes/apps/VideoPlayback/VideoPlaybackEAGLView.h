@@ -15,8 +15,8 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 #import "SampleGLResourceHandler.h"
 
 
-#define NUM_AUGMENTATION_TEXTURES 5
-#define NUM_VIDEO_TARGETS 2
+#define NUM_AUGMENTATION_TEXTURES 6
+#define NUM_VIDEO_TARGETS 3
 
 // VideoPlayback is a subclass of UIView and conforms to the informal protocol
 // UIGLViewProtocol
